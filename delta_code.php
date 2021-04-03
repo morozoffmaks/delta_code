@@ -7,7 +7,7 @@
  <input type="hidden" name="calcdate[событие]" value="Не распознан" data-id="event2" disabled=""> 
  <label>Код с крышки аккумулятора * <input type="text" name="calcdate[код]"></label> 
  <input type="hidden" name="calcdate[дата]" data-id="result"> 
- <label>Email * <input type="email" name="calcdate[email]"></label> 
+<!-- Удалите эту строку, сейчас она закомментирована и не видна <label>Email * <input type="email" name="calcdate[email]"></label>  -->
  <input class="btn btn-default" type="submit">
 </form>
 			<div class="calcdateQueryText">
@@ -44,7 +44,7 @@
 	function f(){
 		if(arguments.callee.done)return;
 		arguments.callee.done=true;
-		var RE_EMAIL=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9а-яА-ЯёЁ]+\.)+[a-zA-Zа-яА-ЯёЁ]{2,}))$/;
+		/* Правила валидации EMAIL. Удалите эту строку var RE_EMAIL=/^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9а-яА-ЯёЁ]+\.)+[a-zA-Zа-яА-ЯёЁ]{2,}))$/; */
 		function dbg(){for(var i in arguments)console.log(arguments[i]);return arguments[i];}
 		function calcdate(s){
 			var re=[
@@ -126,7 +126,7 @@
 				QT=T.find('.calcdateQueryText').html();
 			F.submit(function(e){
 				var r=I.val().replace(/\s+/g,''),_,m=F.find('[type=email]').eq(0);
-				if(!r||m&&!RE_EMAIL.test(m=m.val()))
+				if(!r||m)
 					R.hide().filter('.calcdateError')
 						.text(	!r?'Введите код':
 								m?'Неверный e-mail':
@@ -150,7 +150,7 @@
 								.find('textarea:eq(0)').val(QT.replace('_',_)).end()
 								.find('[data-id=code]').val(_).end()
 								.find('input:visible').get(0).focus();
-							if(!(_=Q.find('[type=email]').eq(0)).val())_.val(m);
+							/* if(!(_=Q.find('[type=email]').eq(0)).val())_.val(m); */
 							FB.prop('disabled',true);
 						}
 						R.filter('.calcdateResult').toggle(!!r).html(r);
